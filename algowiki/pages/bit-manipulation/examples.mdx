@@ -1,0 +1,106 @@
+# Examples of Bit Manipulation
+
+## How to check if a number is power of 2 ?
+
+- Naive way is to keep dividing it by $2$ if it is even and if we end up with $1$ it is power of $2$ otherwise it's not.
+
+```java filename="demo.java" copy
+boolean isPowerOfTwo(int n) {
+    if(n == 0)
+        return false;
+    else {
+        while(n % 2 == 0) n /= 2;
+        return (n == 1);
+    }
+}
+```
+
+Time complexity of the above code is $$O(log_2n)$$.
+
+- Here is a clever trick to solve it in constant time $$O(1)$$. <br />
+  - Consider a number $$n$$ which is power of $2$ which means $n = 2 ^ j$ for some $j$ <br /> It is obvious that $n$ will have only $j^{\text{th}}$
+    bit equal to $1$, all the remaining bits will be $0$ <br />
+  - Now think about $$(n - 1)$$, it will be have $k^{\text{th}}$ bit equal to $1$ if $k < j$. <br />
+  - In simpler words $$(n - 1)$$ will have all the bits as 1 after $j^{\text{th}}$ bit.
+  - Consider $n = 32$ <br />
+    $32 = 00100000_2$ <br />
+    $31 = 00011111_2$ <br />
+    $32 \, \& \, 31 = 00000000_2$<br />
+  - This can be generalized to any $n$ which is power of $2$ i.e $n = 2 ^ j$
+  - $$
+    \boxed{
+        n \text{ is a power of 2 iff : \, }
+        n \, \& \, (n - 1) = 0 \, \text{and} \, n\,!= 0}
+    $$
+
+```java filename="demo.java" copy
+boolean isPowerOfTwo(int n) {
+    if(n == 0)
+        return false;
+    return (n & (n - 1)) == 0
+}
+```
+
+## How to check if certain bit at position is set in a number
+
+We can use combination of Logical **AND** and Left shift operator **&lt;&lt;**
+
+<br /> Notice that $2 ^ i$ can be written as $1 << i$ and if $i^{\text{th}}$ bit of $n$ is $0$ then $n * (1 << i) = 0$ <br />
+
+> **Note:** <a href='https://gaelfoppolo.com/bit-masks-as-feature-flags/' target="_blank"><u>This is widely used in modern SDLC for feature toggle in deployments to check if certain feature is enabled or not</u></a>
+
+```java filename="demo.java" copy
+boolean checkIfIthBitIsSet(int n, int i) {
+    return ((n & (1 << i)) != 0);
+}
+```
+
+## Generate all possible subsets of a set
+
+We can use bitmasking to solve this problem. <br />
+Consider a set $\{ x, y, z \}$ of three elements. We can iterate over all possible binary masks of length $3$ <br />
+We will be picking $i^{\text{th}}$ element from original set if current bit mask has $i^{\text{th}}$ bit set.
+
+- $000_2 = \{\}$
+- $001_2 = \{z\}$
+- $010_2 = \{y\}$
+- $011_2 = \{y,z\}$
+- $100_2 = \{x\}$
+- $101_2 = \{x,z\}$
+- $110_2 = \{x,y\}$
+- $111_2 = \{x,y,z\}$
+
+```java filename="demo.java" copy
+// Function to generate all possible subsets using bit manipulation
+public static List<List<Integer>> generateSubsets(int[] set) {
+    List<List<Integer>> result = new ArrayList<>();
+    int n = set.length;
+    // There are 2^n subsets for a set of size n
+    for (int i = 0; i < (1 << n); i++) {  // Loop through all 2^n possible subsets
+        List<Integer> subset = new ArrayList<>();
+        for (int j = 0; j < n; j++) {
+            // Check if the j-th bit of i is set (1)
+            if ((i & (1 << j)) != 0) {
+                subset.add(set[j]);
+            }
+        }
+        result.add(subset);
+    }
+    return result;
+}
+```
+
+## Few more tricks with bit manipulation
+
+- Return rightmost $1$ bit or $MSB$ in $n$ <br />
+  $$
+  n \, \& \, (n - 1)
+  $$
+- Set $i^{\text{th}}$ bit to $1$ in $n$ <br />
+  $$
+  n \mid (1 << i)
+  $$
+- Toggle $i^{\text{th}}$ bit in $n$ <br />
+  $$
+  n \oplus (1 << i)
+  $$

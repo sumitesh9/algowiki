@@ -1,0 +1,14 @@
+{
+  "index": "Introduction",
+  "bit-manipulation": "Bit Manipulation",
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://www.linkedin.com/in/sumitesh9/",
+    "newWindow": true
+  }
+}

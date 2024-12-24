@@ -1,0 +1,92 @@
+# Bit Manipulation
+
+Bit manipulation is a fundamental concept in computer science that plays a crucial role in various aspects of programming and system design. Some of popular examples include
+
+- Network Protocols (Handling TCP / IP headers)
+- Graphics Programming (Color Manipulation)
+- File Compression algorithms
+- Cryptography and Encryption
+- Game development (State management)
+
+We all know that 1 byte comprises of 8 bits and any integer or character can be represented using bits in computers, which we call its binary form(contains only 1 or 0) or in its base 2 form.
+In almost all of the languages `int` data type integers are represented using 32 bits wherease `long` are represented using 64 bits
+
+<br />
+$$ 15 = {1111}_2 = 1 * 2^3 + 1*2^2 + 1*2^1 + 1*2^0 $$ <br />
+$$ 12 = {1100}_2 = 1 * 2^3 + 1*2^2 + 0*2^1 + 0*2^0 $$
+
+For characters, we use ASCII representation, which are in the form of integers which again can be represented using bits as explained above.
+
+## Bitwise operators
+
+Bitwise operators are operators as the name imply are used to perform operations on bits. These operators can be classified on the basis on how many operands they operate on.
+For example - Unary operator require only one operand (ex: Logical **NOT**) whereas **AND**, **OR**, **XOR** are binary operators.
+
+- **NOT ( ~ )** : Perhaps the most simple operator is NOT operator, which just reverses or complements the bit. i.e if the current bit is 0 it toggles to 1 and if current bit is 1 it toggles to 0.
+  - N = 17 = {10001}<sub>2</sub>
+  - ~N = 14 = {1110}<sub>2</sub>
+- **AND ( & )** : Operates on two integers bitwise and returns 1 iff both the bits are 1 otherwise returns 0
+  - A = 17 = {10001}<sub>2</sub>
+  - B = 21 = {10101}<sub>2</sub>
+  - A & B = 17 = {10001}<sub>2</sub>
+- **OR ( | )** : Operates on two integers bitwise and returns 1 if atleast either bit is 1 otherwise returns 0
+  - A = 17 = {10001}<sub>2</sub>
+  - B = 21 = {10101}<sub>2</sub>
+  - A | B = 21 = {10101}<sub>2</sub>
+- **XOR ( ^ )** : Operates on two integers bitwise and returns 0 if both the bits are same otherwise returns 1
+  - A = 17 = {10001}<sub>2</sub>
+  - B = 21 = {10101}<sub>2</sub>
+  - A ^ B = 4 = {100}<sub>2</sub>
+- **Left Shift ( &lt;&lt; )** : The left shift operator (&lt;&lt;) is a bitwise operator that shifts the bits of a number to the left by a specified number of positions. Each left shift effectively multiplies the number by 2 for each shift position.
+
+  $$
+      a << b = a * (2 ^ b)
+  $$
+
+  - Example :- 3 &lt;&lt; 2 = 12 <br />
+    Binary: 00000011 (&lt;&lt;) 2 => 00001100
+  - Use cases :
+
+    1. **Multiplication by Powers of 2**: <br />
+       $$𝑥$$ &lt;&lt; $$n$$ is equivalent to 𝑥 \* $$(2 ^ n)$$
+    2. **Bitmasking and Flags**: <br />
+       _Bitmasking_ is the process of using bitwise operators to manipulate specific bits in binary data. <br />
+       _Flags_ are specific bits in a binary number used to represent or track the state of certain features or options (on/off, true/false).
+
+- **Right Shift ( &lt;&lt;)** : The right shift operator (&rt;&rt;) is a bitwise operator that shifts the bits of a number to the right by a specified number of positions.
+
+  $$
+      a >> b = a \div (2 ^ b)
+  $$
+
+```java filename="demo.java" {3, 9, 13, 17, 21, 25} copy
+public class BitwiseDemo {
+    public static void main(String[] args) {
+        // Bitwise AND
+        int a = 5;  // 0101
+        int b = 3;  // 0011
+        int andResult = a & b;  // 0001 (1 in decimal)
+        System.out.println("AND: " + andResult);  // Output: 1
+
+        // Bitwise OR
+        int orResult = a | b;  // 0111 (7 in decimal)
+        System.out.println("OR: " + orResult);  // Output: 7
+
+        // Bitwise XOR
+        int xorResult = a ^ b;  // 0110 (6 in decimal)
+        System.out.println("XOR: " + xorResult);  // Output: 6
+
+        // Bitwise NOT
+        int notResult = ~a;  // 1010 (-6 in decimal)
+        System.out.println("NOT: " + notResult);  // Output: -6
+
+        // Left Shift
+        int leftShiftResult = a << 1;  // 1010 (10 in decimal)
+        System.out.println("Left Shift: " + leftShiftResult);  // Output: 10
+
+        // Right Shift
+        int rightShiftResult = a >> 1;  // 0010 (2 in decimal)
+        System.out.println("Right Shift: " + rightShiftResult);  // Output: 2
+    }
+}
+```

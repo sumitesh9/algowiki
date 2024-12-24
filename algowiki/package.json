@@ -1,0 +1,39 @@
+{
+  "name": "algowiki",
+  "version": "0.0.1",
+  "description": "AlgoWiki is simple and easy to use platform for learning algorithms.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumitesh9/algowiki"
+  },
+  "author": "Sumitesh Naithani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sumitesh9/algowiki/issues"
+  },
+  "homepage": "https://github.com/sumitesh9/algowiki#readme",
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@next/mdx": "^15.1.2",
+    "@types/mdx": "^2.0.13",
+    "@types/react": "^19.0.2",
+    "next": "^13.0.6",
+    "next-mdx-remote": "^5.0.0",
+    "nextra": "latest",
+    "nextra-theme-docs": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.10",
+    "typescript": "^4.9.3"
+  }
+}
