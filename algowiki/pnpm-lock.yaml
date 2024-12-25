@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@mdx-js/loader':
-        specifier: ^3.1.0
-        version: 3.1.0(acorn@8.8.1)
-      '@mdx-js/react':
-        specifier: ^3.1.0
-        version: 3.1.0(@types/react@19.0.2)(react@18.2.0)
       '@next/mdx':
         specifier: ^15.1.2
         version: 15.1.2(@mdx-js/loader@3.1.0(acorn@8.8.1))(@mdx-js/react@3.1.0(@types/react@19.0.2)(react@18.2.0))
@@ -1467,6 +1461,7 @@ snapshots:
     transitivePeerDependencies:
       - acorn
       - supports-color
+    optional: true
 
   '@mdx-js/mdx@2.2.1':
     dependencies:

@@ -1,6 +1,7 @@
 {
   "index": "Introduction",
   "bit-manipulation": "Bit Manipulation",
+  "recursion-backtracking": "Recursion & Backtracking",
   "about": {
     "title": "About",
     "type": "page"

@@ -1,0 +1,142 @@
+# Backtracking: A Problem-Solving Technique
+
+Backtracking is a **problem-solving algorithm** that involves trying to build a solution incrementally, abandoning solutions ("backtracking") as soon as it is determined that they cannot lead to a valid solution. It is often used for optimization problems, constraint satisfaction, and puzzles where multiple possibilities must be explored.
+
+### Key Concepts of Backtracking
+
+1. **Explore all possible solutions**:
+   - The goal is to build solutions step-by-step. At each step, we try a potential option and recursively attempt to build a solution from there.
+2. **Pruning**:
+   - If a partial solution cannot possibly lead to a valid solution, we prune the search tree and backtrack to the previous step to try another option.
+3. **Recursive Nature**:
+
+   - Backtracking is typically implemented recursively. Each recursive call explores a possible option and either finds a valid solution or moves on to the next option.
+
+4. **Backtracking Step**:
+   - If a step leads to an invalid or unsolvable situation, backtrack by undoing the previous step (reverting to the previous state) and then trying the next possibility.
+
+### Example: N-Queens Problem
+
+The **N-Queens problem** is a classic example of backtracking. The goal is to place **N queens** on an **N x N chessboard** such that no two queens threaten each other. That is, no two queens can share the same row, column, or diagonal.
+
+#### Backtracking Approach to Solve N-Queens:
+
+1. **Place a queen in a row**:
+   - Start by placing a queen in the first row, then try to place a queen in each subsequent row.
+2. **Check validity**:
+   - After placing each queen, check if it leads to any conflicts (same column, same diagonal).
+3. **Backtrack if needed**:
+   - If a conflict occurs, backtrack by removing the most recently placed queen and try the next possible position.
+4. **Continue until all queens are placed**:
+   - If all queens are placed without conflicts, the solution is found. If not, backtrack and try a new placement for previous queens.
+
+### Backtracking Algorithm Pseudocode
+
+Here’s a pseudocode for backtracking:
+
+```java filename="backtracking.java" copy
+public class NQueens {
+    private int N; // Size of the chessboard (N x N)
+    private int[] board; // Array to store the position of queens
+
+    public NQueens(int N) {
+        this.N = N;
+        this.board = new int[N]; // Initialize the board
+    }
+
+    // Function to solve the N-Queens problem
+    public boolean solveNQueens() {
+        return solve(0); // Start solving from the first row
+    }
+
+    // Recursive function to solve the problem row by row
+    private boolean solve(int row) {
+        // If all queens are placed, return true
+        if (row == N) {
+            printBoard(); // Print the solution (optional)
+            return true;
+        }
+
+        // Try placing the queen in each column of the current row
+        for (int col = 0; col < N; col++) {
+            // Check if placing the queen at board[row][col] is valid
+            if (isSafe(row, col)) {
+                board[row] = col; // Place the queen
+
+                // Recurse to place the next queen
+                if (solve(row + 1)) {
+                    return true; // If solution is found, return true
+                }
+
+                // Backtrack if placing the queen didn't lead to a solution
+                board[row] = -1; // Remove the queen
+            }
+        }
+
+        // If no solution is found in the current row, return false
+        return false;
+    }
+
+    // Check if it is safe to place a queen at (row, col)
+    private boolean isSafe(int row, int col) {
+        // Check for conflicts with previously placed queens
+        for (int i = 0; i < row; i++) {
+            // Check if the queen is in the same column or diagonal
+            if (board[i] == col || Math.abs(board[i] - col) == Math.abs(i - row)) {
+                return false; // Conflict detected
+            }
+        }
+        return true; // No conflict
+    }
+
+    // Function to print the solution
+    private void printBoard() {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (board[i] == j) {
+                    System.out.print("Q "); // Print the queen's position
+                } else {
+                    System.out.print(". "); // Empty space
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int N = 4; // For example, solve the 4-Queens problem
+        NQueens nQueens = new NQueens(N);
+        if (!nQueens.solveNQueens()) {
+            System.out.println("No solution found.");
+        }
+    }
+}
+```
+
+### Applications of Backtracking
+
+1. **Combinatorial problems**: Finding all combinations, subsets, or permutations of a set of elements.
+2. **Constraint satisfaction problems**: Solving problems like Sudoku, map coloring, or the N-Queens problem.
+3. **Optimization problems**: Finding the optimal solution in problems like the traveling salesman problem (TSP) or knapsack problems.
+4. **Puzzles**: Solving puzzles like mazes, word search, or 8-puzzle.
+
+### Advantages and Disadvantages
+
+#### Advantages:
+
+- **Simple and intuitive**: The algorithm is easy to understand and implement.
+- **General-purpose**: Can be applied to a wide range of problems that involve constraints.
+
+#### Disadvantages:
+
+- **Inefficient for large inputs**: Backtracking can be slow and inefficient if the problem has a large search space.
+- **Prone to performance issues**: Without pruning or optimization, backtracking can lead to excessive recursive calls and slow performance.
+
+### Optimizations
+
+To optimize backtracking, techniques such as **pruning** (eliminating infeasible solutions early) and **memoization** (caching results) can be used to improve performance.
+
+---
+
+Backtracking is a versatile algorithmic technique used in many different problem domains, particularly when exhaustive search is needed, and it can be made more efficient with careful pruning and optimization.

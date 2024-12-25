@@ -1,0 +1,46 @@
+# Introduction
+
+A function calling itself is called `Recursion`. <br />
+Example :
+
+```java filename="recursion.java" {3} copy
+void hello() {
+    System.out.println("Hello");
+    hello(); // This is recursive call
+}
+```
+
+## When to use it ?
+
+Recursion is usually applied to problems which can be broken down into smaller subproblems. <br />
+Example : Find factorial of a number
+
+Factorial of a positive number $n$ is defined as :
+
+$$
+    n! = n * (n - 1) * (n - 2) .... * 1
+$$
+
+### Base case
+
+Base case is the condition that `stops` the recursion. Usually it is the condition for which result is already known.
+$n = 0$ is the base case for the factorial problem where we already know the answer as $1$
+
+### Recursive case
+
+The recursive case in recursion is the part of the function that reduces the problem into smaller subproblems and makes a recursive call to solve these subproblems. It's the part of the function where the function calls itself, typically with different parameters, until it eventually reaches the base case.
+
+$$
+\text{factorial}(n) =
+\begin{cases}
+1 & \text{if } n = 0 \\
+n * \text{factorial}(n - 1) & \text{if } n > 0
+\end{cases}
+$$
+
+```java filename="factorial.java" {3} copy
+int factorial(int x) {
+    if (x == 0) return 1; // Base condition
+    return x * factorial(x - 1); // Recursive call
+}
+```

@@ -1,0 +1,36 @@
+# Examples of Recursion
+
+## Calculate fibonacci number
+
+- **Problem** - Calculate the $n^{th}$ fibonacci number in the fibonacci sequence. <br /> Fibonacci number is defined as $F(n)$ = $F(n - 1)$ + $F(n - 2)$
+- **Application** - Fibonacci numbers appear in nature, finance (e.g., Fibonacci retracement), and algorithms.
+- **Recursive Approach** -
+  $$
+  F(n) =
+  \begin{cases}
+  0 & \text{if } n = 0 \\
+  1 & \text{if } n = 1 \\
+  F(n-1) + F(n-2) & \text{if } n > 1
+  \end{cases}
+  $$
+
+## Binary Search
+
+- **Problem** - Search for a target element in a sorted array
+- **Application** - Binary search is a fast search algorithm used in searching databases, dictionaries, and in solving problems related to searching over sorted data.
+- **Recursive Approach** -
+  - Compare the target value with the middle element of the array.
+  - If it matches, return the index. Otherwise, recurse into the left or right half based on the comparison.
+
+## Tree Traversals
+
+- **Problem** - Traverse a tree (like a binary tree) to process nodes in a specific order.
+- **Application** - Tree traversal is used in algorithms related to parsing, searching, hierarchical data structure management, and expression evaluation.
+
+## Divide and Conquer algorithms
+
+- **Problem** - Break a large problem into smaller subproblems, solve them recursively, and combine their results.
+- **Application** - Many efficient algorithms use the divide-and-conquer approach, such as:
+  - **Merge Sort**: Divide the array into two halves, recursively sort each half, and merge them.
+  - **Quick Sort**: Pick a pivot element, partition the array, and recursively sort the subarrays.
+  - **Binary Search**: Divide the search space in half at each step.
