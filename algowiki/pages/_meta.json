@@ -2,6 +2,7 @@
   "index": "Introduction",
   "bit-manipulation": "Bit Manipulation",
   "recursion-backtracking": "Recursion & Backtracking",
+  "number-theory": "Number Theory",
   "about": {
     "title": "About",
     "type": "page"
@@ -10,6 +11,12 @@
     "title": "Contact ↗",
     "type": "page",
     "href": "https://www.linkedin.com/in/sumitesh9/",
+    "newWindow": true
+  },
+  "atcoder": {
+    "title": "AtCoder ↗",
+    "type": "page",
+    "href": "https://atcoder.jp/users/somu_9",
     "newWindow": true
   }
 }

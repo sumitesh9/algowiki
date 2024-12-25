@@ -1,0 +1,37 @@
+# Introduction
+
+Number theory is a branch of mathematics that deals with the properties and `relationships of numbers, particularly integers`. It involves the study of prime numbers, divisibility, and the structure of the set of integers. Number theory has many applications in `cryptography`, `computer science`, and `pure mathematics`.
+
+## Modular arithmetic
+
+Modular arithmetic is a system of arithmetic for integers where numbers "wrap around" upon reaching a certain value called the modulus. It is often described as "clock arithmetic," where after reaching a certain value, the counting starts again from zero.
+
+For example, in modular arithmetic, if the modulus is 12 (like a clock), after 11 comes 0, then 1, 2, etc.
+
+Mathematically, we write modular arithmetic as:
+
+$$
+a \equiv b \ (\text{mod} \ m)
+$$
+
+This means that when $a$ is divided by $m$, the remainder is $b$. In other words, $a$ and $b$ are congruent modulo $m$.
+It is also often represented as $\%$ symbol
+
+### Properties of modulo arithmetic
+
+- $(a + b) \,\% \,m = ((a \,\%\, m) + (b \,\%\, m)) \,\%\,m$
+- $(a - b) \,\% \,m = ((a \,\%\, m) - (b \,\%\, m) + m) \,\%\,m$
+- $(a * b) \,\% \,m = ((a \,\%\, m) * (b \,\%\, m)) \,\%\,m$
+- $(a \,/\, b) \,\% \,m = ((a \,\%\, m) * (b ^ {-1} \,\%\, m)) \,\%\,m$
+
+Here $b^{-1}$ is `multiplicative modulo inverse` of $b$ and $m$
+
+### Example
+
+- Assume $a$ = $10 ^ {17}$ , $b$ = $10 ^ {15}$ and $c$ = $10 ^ {9} + 7$ and we need to find $(a * b) \,\%\,c$. This would easily overflow in `int` or `long` resulting in incorrect results.
+  On applying - $(a * b) \,\% \,m = ((a \,\%\, m) * (b \,\%\, m)) \,\%\,m$ we would be able to solve this correctly here is how -
+
+- $10 ^ {17} \, \% \, (10 ^ {9} + 7) = 300000007$ <br />
+  $10 ^ {15} \, \% \, (10 ^ {9} + 7) = 993000007$ <br />
+  $300000007 * 993000007 = 297900009051000049$ <br />
+  $297900009051000049 \,\% \, (10 ^ {9} + 7) = 965700007$

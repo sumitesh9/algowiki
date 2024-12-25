@@ -1,0 +1,83 @@
+# Introduction
+
+Binary exponentiation allows us to calculate $a ^ {n}$ in $O(log_2n)$ time complexity instead of $O(n)$ complexity.
+
+## Key idea
+
+The idea is to reduce the problem size by repeatedly squaring the base and halving the exponent. This exploits the property:
+
+$$
+a^n =
+\begin{cases}
+(a^{n/2})^2 & \text{if } n \text{ is even} \\
+a \cdot (a^{(n-1)/2})^2 & \text{if } n \text{ is odd}
+\end{cases}
+$$
+
+## Recursive algorithm
+
+```java filename="exponentiation.java" {2, 3, 4} copy
+static int solve(int a, int n) {
+    if (n == 0) return 1; // Base case
+    if (n % 2 == 0) return solve(a * a , n / 2); // Recursive case
+    return a * solve(a * a, (n - 1) / 2); // Recursive case
+}
+```
+
+## Iterative algorithm
+
+```java filename="exponentiation.java" {3, 4, 5, 6, 7} copy
+static int solve(int a, int n) {
+    int ans = 1; // Initialize the answer
+    while (n > 0) {
+        if ((n & 1) > 1) ans *= a; // If n is odd, multiply ans with a
+        a *= a; // Raise a's power by 1
+        n >>= 1; // Divide n by 2
+    }
+    return ans;
+}
+```
+
+## Applications
+
+### Applying permutation $k$ times
+
+A permutation $P$ of size $n$ maps each element of a set ${1,2,...,n}$ to another element of the same set. <br />
+We need to compute the result of applying the permutation $P \,k$ times denoted by $P ^ k$
+
+- **Key idea**
+
+  - A permutation consists of cycles. For example:
+    $P = [2,3,1]$ means: $1→2, 2→3, 3→1$
+    Each element eventually loops back to its starting position. Understanding these cycles allows us to compute the result efficiently.
+  - Treat the permutation as a transformation matrix $T$. Applying $P$ $k$ times is equivalent to raising $T$ to the power $k$ denoted by $T^k$.
+    Binary exponentiation helps to calculate $T^k$ in $O(n * log_2⁡k)$ time instead of $O(n * k)$ time.
+
+- **Iterative algorithm**
+
+```java permutation.java {3, 9, 10} copy
+static int[] permuteKTimes(int[] a, int k) {
+    int n = a.length;
+    int[] P = new int[n];
+
+    // Intialize P with input array
+    for (int i = 0; i < n; ++i) P[i] = a[i];
+
+    while (k > 0) {
+        if (k % 2 == 1) P = applyPermutation(P, a);
+        P = applyPermutation(P, P); // Square the permutation
+        k /= 2;
+    }
+
+    return P;
+}
+
+static int applyPermutation(int[] a, int [] b) {
+    int n = a.length;
+    int[] result = new int[n];
+    for (int i = 0; i < n; ++i) {
+        result[i] = b[a[i]];
+    }
+    return result;
+}
+```
