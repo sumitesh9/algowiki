@@ -1,0 +1,74 @@
+# Greatest Common Divisor
+
+Greatest Common Divisor or commonly known as `gcd` of two integers is greatest common integer that completely divides both of them.
+
+$
+\gcd(a,\,b) = \max{d \in \mathbb{Z}^+ : d\,|\,a \text{ and } d\,|\,b}
+$
+
+$d\,|\,a$ `means d divides a`
+
+$gcd(0,\, a) = a$ <br />
+$gcd(0,\, 0) = undefined$ <br />
+
+## Euclidean Algorithm
+
+- Problem :- Find $gcd(a,\, b)$ <br />
+  Naive way of doing this would be to just iterate over all integers in reverse order until you find an integer that divides both $a$ and $b$. <br />
+  `Time complexity` - $O(min(a,\, b))$ <br /> <br />
+
+- Intuition behind `Euclidean Algorithm` to solve this problem efficiently <br /><br />
+  Let's say $d$ is some integer that divides both $a$ and $b$. Then we can prove $d$ also divides $a - b$. <br />
+  `Proof -` <br /> $(a - b) \,\% \,d = ((a \,\%\, d) - (b \,\%\, d) + d) \,\%\,d$ <br />
+  $(a - b) \,\% \,d = (0 - 0 + d) \,\%\,d \,\,\,\,\,\,\,\,\,\because a \,\%\, d = 0\, \, \,b \, \%\, d = 0$ <br />
+  $\therefore (a - b) \,\% \,d = d\,\%\,d = 0 \,\blacksquare$ <br /><br />
+  Let's build further intuition on this `proof`. Let $a$ be represented as $(b * q) + r \, \mid$ $q$ is $quotient$ and $r$ is $remainder$.<br />
+  Now we can prove that $d$ also divides $r$. Here is the `proof`<br />
+
+  - $a = (b * q) + r$ <br />
+  - $a\,\%\,d = ((b * q) + r)\,\%\,d$ <br />
+
+  - $0 = ((b * q) + r)\,\%\,d \,\,\,\,\,\,\,\because a\,\%\,d = 0$ <br />
+  - $((b * q) + r)\,\%\,d = ((b * q)\%\,d) + (r\,\%\,d) = 0$ <br />
+  - $((b * q)\%\,d) + (r\,\%\,d) = (((b\,\%\,d) * (q\,\%\,d)) + (r\,\%\,d) = 0$ <br />
+  - $((b * q)\%\,d) + (r\,\%\,d) = ((0 * (q\,\%\,d)) + (r\,\%\,d)) = 0 \because (b\,\%\,d = 0)$ <br />
+  - $(0 + (r\,\%\,d)) = (r\,\%\,d) = 0 \,\blacksquare$
+
+    Let's see why this helps : <br />
+    If a number divides both $a$ and $b$
+    then it must also divide $r$ because $(r = a - (b * q))$ <br />
+    So $gcd(a, \,b) = gcd(b,\,r)$
+
+  - `Example`
+
+    - Let's see a concrete example with $48$ and $18$:
+    - $48 = 18 * 2 + 12$ (First divide $48$ by $18$)
+    - $18 = 12 * 1 + 6$ (Then divide $18$ by $12$)
+    - $12 = 6 × 2 + 0$ (Finally divide $12$ by $6$)
+    - At each step, we're reducing the problem to finding gcd of smaller numbers <br /> $GCD(48,18) = GCD(18,12) = GCD(12,6) = 6$ <br /><br />
+
+      `Why this algorithm works ?`
+
+    - Each remainder is strictly smaller than the previous divisor
+    - The remainders keep getting smaller
+    - They can't go below zero
+    - So the process must eventually terminate when we get remainder $0$
+    - The last non-zero remainder is our gcd
+
+### Recursive Definition (Euclidean Algorithm)
+
+- $
+  \gcd(a,b) =
+  \begin{cases}
+  |a| & \text{when } b = 0 \,;\,
+  \gcd(b, a \bmod b) & \text{when } b \neq 0
+  \end{cases}
+  $
+
+```java gcd.java {2} copy
+static int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b , a % b);
+}
+```
+
+- `Time Complexity` $O(log_2(max(a,\, b)))$
